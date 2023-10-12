@@ -1,37 +1,38 @@
 use std::io;
 
 fn main() {
-    println!("Loan Calculator");
+    println!("Welcome to the loan calculator!");
 
-    // Get principal amount
-    let principal = get_input("Enter the principal amount: ");
+    let principal: f64 = get_principal();
+    let interest_rate: f64 = get_interest_rate();
+    let loan_term: u32 = get_loan_term();
 
-    // Get annual interest rate
-    let interest_rate = get_input("Enter the annual interest rate: ");
+    let loan_amount = calculate_loan_amount(principal, interest_rate, loan_term);
 
-    // Get loan duration in months
-    let months = get_input("Enter the loan duration in months: ");
-
-    // Calculate monthly interest rate
-    let monthly_interest_rate = (interest_rate / 100.0) / 12.0;
-
-    // Calculate monthly payment
-    let monthly_payment = principal * monthly_interest_rate / (1.0 - (1.0 + monthly_interest_rate).powf(-months));
-
-    println!("Your monthly payment is: {:.2}", monthly_payment);
+    println!("Your loan amount is: {}", loan_amount);
 }
 
-fn get_input(prompt: &str) -> f64 {
-    println!("{}", prompt);
-
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-
-    match input.trim().parse() {
-        Ok(num) => num,
-        Err(_) => {
-            println!("Please enter a valid number.");
-            get_input(prompt)
-        },
-    }
+fn get_principal() -> f64 {
+    println!("Enter the principal amount:");
+    let mut principal = String::new();
+    io::stdin().read_line(&mut principal).unwrap();
+    principal.trim().parse().unwrap()
 }
+
+fn get_interest_rate() -> f64 {
+    println!("Enter the interest rate:");
+    let mut interest_rate = String::new();
+    io::stdin().read_line(&mut interest_rate).unwrap();
+    interest_rate.trim().parse().unwrap()
+}
+
+fn get_loan_term() -> u32 {
+    println!("Enter the loan term:");
+    let mut loan_term = String::new();
+    io::stdin().read_line(&mut loan_term).unwrap();
+    loan_term.trim().parse().unwrap()
+}
+
+fn calculate_loan_amount(principal: f64, interest_rate
+
+==================================
